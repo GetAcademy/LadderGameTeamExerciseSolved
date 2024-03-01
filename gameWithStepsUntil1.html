@@ -11,10 +11,15 @@
 <body>
     <div id="app"></div>
     <script>
-        document.getElementById('app').innerHTML = createRowMinus(90);
+        document.getElementById('app').innerHTML =
+            createRowMinus(90)
+            + createRowPlus(73)
+            + createRowMinusB(90)
+            + createRowPlusB(73)
+            + createRow(90, -1)
+            + createRow(73, 1);
+
         // Enkleste versjon
-
-
         function createRowMinus(startValue) {
             return /*HTML*/`
                 <div>${startValue}</div>
@@ -29,8 +34,44 @@
             `;
         }
 
+        function createRowPlus(startValue) {
+            return /*HTML*/`
+                <div>${startValue}</div>
+                <div>${startValue + 1}</div>
+                <div>${startValue + 2}</div>
+                <div>${startValue + 3}</div>
+                <div>${startValue + 4}</div>
+                <div>${startValue + 5}</div>
+                <div>${startValue + 6}</div>
+                <div>${startValue + 7}</div>
+                <div>${startValue + 8}</div>
+            `;
+        }
+
+        // Enkleste versjon + løkke
+        function createRowMinusB(startValue) {
+            let html = '';
+            for (let numberToSubtract = 0; numberToSubtract < 9; numberToSubtract++) {
+                html += /*HTML*/`<div>${startValue - numberToSubtract}</div>`;
+            }
+            return html;
+        }
+
+        function createRowPlusB(startValue) {
+            let html = '';
+            for (let numberToAdd = 0; numberToAdd < 9; numberToAdd++) {
+                html += /*HTML*/`<div>${startValue + numberToAdd}</div>`;
+            }
+            return html;
+        }
+
+        // kun én funksjon
         function createRow(startValue, change) {
-            let html
+            let html = '';
+            for (let numberToAdd = 0; numberToAdd < 9; numberToAdd++) {
+                html += /*HTML*/`<div>${startValue + numberToAdd * change}</div>`;
+            }
+            return html;
         }
     </script>
 </body>

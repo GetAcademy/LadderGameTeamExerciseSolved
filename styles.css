@@ -7,3 +7,7 @@
 #app>div {
     border: 1px solid gray;
 }
+
+span.piece {
+    font-size: 150%;
+}

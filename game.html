@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model 
+        let currentSquareNo = 0;
+
+        // controller
+        updateView();
+        function move(steps){
+            currentSquareNo += steps;
+            const ladderEndSquareNo = getLadderStartingFrom(currentSquareNo);
+            if(ladderEndSquareNo!=null){
+                currentSquareNo = ladderEndSquareNo;
+            }
+            updateView();
+        }
+
+        // view 
+        function updateView() {
+            document.getElementById('app').innerHTML = createBoard();
+        }
+
+        function createBoard() {
+            let html = '';
+            for (let squareNo = 90; squareNo > 1; squareNo -= 18) {
+                html += createRow(squareNo, -1) + createRow(squareNo - 17, 1);
+            }
+            return html;
+        }
+
+        function createRow(startValue, change) {
+            let html = '';
+            for (let numberToAdd = 0; numberToAdd < 9; numberToAdd++) {
+                const squareNo = startValue + numberToAdd * change;
+                const piece = currentSquareNo == squareNo ? '<span class="piece">⛂</span>' : '';
+
+                const color = getSquareColor(squareNo);
+                const ladderEndSquareNo = getLadderStartingFrom(squareNo);
+                const ladderText = ladderEndSquareNo ==
+                    null ? '' : `<small>stige->${ladderEndSquareNo}</small>`;
+                html += /*HTML*/`
+                    <div style="background-color: ${color}">
+                        ${squareNo} <br/>
+                        ${piece}<br/>
+                        ${ladderText}
+                    </div>
+                `;
+            }
+            return html;
+        }
+
+        function getSquareColor(squareNo) {
+            if (squareNo == 90) return 'darkorange';
+            const ladderEndSquareNo = getLadderStartingFrom(squareNo);
+            const ladderStartSquareNo = getLadderEndingIn(squareNo);
+            if (ladderEndSquareNo != null) { // betyr: det er stige som begynner her
+                return ladderEndSquareNo > squareNo ? 'limegreen' : 'indianred';
+
+            } else if (ladderStartSquareNo != null) { // betyr: det er en stige som ender her
+                return ladderStartSquareNo < squareNo ? 'lightgreen' : 'pink';
+            } else {
+                return 'khaki';
+            }
+        }
+
+        function getLadderEndingIn(theEndSquareNo) {
+            for (let fromSquareNo = 1; fromSquareNo < 90; fromSquareNo++) {
+                const endToSquareNo = getLadderStartingFrom(fromSquareNo);
+                if (endToSquareNo == theEndSquareNo) return fromSquareNo;
+            }
+            return null;
+        }
+
+        function getLadderStartingFrom(squareNo) {
+            // opp
+            if (squareNo == 1) return 40;
+            if (squareNo == 8) return 10;
+            if (squareNo == 36) return 52;
+            if (squareNo == 43) return 62;
+            if (squareNo == 49) return 79;
+            if (squareNo == 65) return 82;
+            if (squareNo == 68) return 85;
+
+            // ned
+            if (squareNo == 87) return 70;
+            if (squareNo == 74) return 12;
+            if (squareNo == 64) return 27;
+            if (squareNo == 56) return 37;
+            if (squareNo == 42) return 30;
+            if (squareNo == 33) return 3;
+            if (squareNo == 24) return 5;
+
+            return null;
+        }
+
+    </script>
+</body>
+
+</html>

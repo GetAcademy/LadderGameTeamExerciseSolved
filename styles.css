@@ -1,0 +1,9 @@
+#app {
+    display: grid;
+    grid-template-columns: repeat(9, 9vmin);
+    grid-template-rows: repeat(9, 9vmin);
+}
+
+#app>div {
+    border: 1px solid gray;
+}

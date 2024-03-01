@@ -11,20 +11,20 @@
 <body>
     <div id="app"></div>
     <script>
-        document.getElementById('app').innerHTML =
-            createRowMinus(90)
-            + createRowPlus(73);
+        // document.getElementById('app').innerHTML =
+            // createRowMinus(90)
+            // + createRowPlus(73);
         // document.getElementById('app').innerHTML =
         //     createRowMinusB(90)
         //     + createRowPlusB(73)
-        // document.getElementById('app').innerHTML =
-        //     createRow(90, -1)
-        //     + createRow(73, 1);
+        document.getElementById('app').innerHTML =
+            createRow(90, -1)
+            + createRow(73, 2);
 
         // Enkleste versjon
         function createRowMinus(startValue) {
             return /*HTML*/`
-                <div>${startValue}</div>
+                <div>${startValue - 0}</div>
                 <div>${startValue - 1}</div>
                 <div>${startValue - 2}</div>
                 <div>${startValue - 3}</div>
@@ -38,7 +38,7 @@
 
         function createRowPlus(startValue) {
             return /*HTML*/`
-                <div>${startValue}</div>
+                <div>${startValue + 0}</div>
                 <div>${startValue + 1}</div>
                 <div>${startValue + 2}</div>
                 <div>${startValue + 3}</div>
@@ -53,16 +53,16 @@
         // Enkleste versjon + løkke
         function createRowMinusB(startValue) {
             let html = '';
-            for (let numberToSubtract = 0; numberToSubtract < 9; numberToSubtract++) {
-                html += /*HTML*/`<div>${startValue - numberToSubtract}</div>`;
+            for (let number = 0; number < 9; number++) {
+                html += /*HTML*/`<div>${startValue - number}</div>`;
             }
             return html;
         }
 
         function createRowPlusB(startValue) {
             let html = '';
-            for (let numberToAdd = 0; numberToAdd < 9; numberToAdd++) {
-                html += /*HTML*/`<div>${startValue + numberToAdd}</div>`;
+            for (let number = 0; number < 9; number++) {
+                html += /*HTML*/`<div>${startValue + number}</div>`;
             }
             return html;
         }
@@ -70,8 +70,8 @@
         // kun én funksjon
         function createRow(startValue, change) {
             let html = '';
-            for (let numberToAdd = 0; numberToAdd < 9; numberToAdd++) {
-                html += /*HTML*/`<div>${startValue + numberToAdd * change}</div>`;
+            for (let number = 0; number < 9; number++) {
+                html += /*HTML*/`<div>${startValue + number * change}</div>`;
             }
             return html;
         }

@@ -11,7 +11,7 @@
 <body>
     <div id="app"></div>
     <script>
-        document.getElementById('app').innerHTML = createBoard();
+        document.getElementById('app').innerHTML = createBoardB();
 
         // enkel versjon: 
         function createBoard() {
@@ -25,6 +25,15 @@
                 + createRow(19, 1)
                 + createRow(18, -1)
                 + createRow(1, 1)
+        }
+
+        // med løkke: 
+        function createBoardB() {
+            let html = '';
+            for (let squareNo = 90; squareNo > 1; squareNo -= 18){
+                html += createRow(squareNo, -1) + createRow(squareNo - 17, 1);
+            }
+            return html;
         }
 
         function createRow(startValue, change) {

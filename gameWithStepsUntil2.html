@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        document.getElementById('app').innerHTML = createBoard();
+
+        // enkel versjon: 
+        function createBoard() {
+            return createRow(90, -1)
+                + createRow(73, 1)
+                + createRow(72, -1)
+                + createRow(55, 1)
+                + createRow(54, -1)
+                + createRow(37, 1)
+                + createRow(36, -1)
+                + createRow(19, 1)
+                + createRow(18, -1)
+                + createRow(1, 1)
+        }
+
+        function createRow(startValue, change) {
+            let html = '';
+            for (let numberToAdd = 0; numberToAdd < 9; numberToAdd++) {
+                html += /*HTML*/`<div>${startValue + numberToAdd * change}</div>`;
+            }
+            return html;
+        }
+    </script>
+</body>
+
+</html>

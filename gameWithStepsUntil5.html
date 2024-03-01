@@ -27,7 +27,7 @@
                 const squareNo = startValue + numberToAdd * change;
                 const color = getSquareColor(squareNo);
                 const ladderEndSquareNo = getLadderStartingFrom(squareNo);
-                const ladderText = ladderEndSquareNo == 
+                const ladderText = ladderEndSquareNo ==
                     null ? '' : `<small>stige->${ladderEndSquareNo}</small>`;
                 html += /*HTML*/`
                     <div style="background-color: ${color}">
@@ -42,9 +42,23 @@
         function getSquareColor(squareNo) {
             if (squareNo == 90) return 'darkorange';
             const ladderEndSquareNo = getLadderStartingFrom(squareNo);
-            if (ladderEndSquareNo == null) return 'khaki';
-            if (ladderEndSquareNo > squareNo) return 'limegreen';
-            return 'indianred';
+            const ladderStartSquareNo = getLadderEndingIn(squareNo);
+            if (ladderEndSquareNo != null) { // betyr: det er stige som begynner her
+                return ladderEndSquareNo > squareNo ? 'limegreen' : 'indianred';
+
+            } else if (ladderStartSquareNo != null) { // betyr: det er en stige som ender her
+                return ladderStartSquareNo < squareNo ? 'lightgreen' : 'pink';
+            } else {
+                return 'khaki';
+            }
+        }
+
+        function getLadderEndingIn(theEndSquareNo) {
+            for (let fromSquareNo = 1; fromSquareNo < 90; fromSquareNo++) {
+                const endToSquareNo = getLadderStartingFrom(fromSquareNo);
+                if (endToSquareNo == theEndSquareNo) return fromSquareNo;
+            }
+            return null;
         }
 
         function getLadderStartingFrom(squareNo) {

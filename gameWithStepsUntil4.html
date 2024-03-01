@@ -32,11 +32,11 @@
         }
 
         function getSquareColor(squareNo) {
+            if (squareNo == 90) return 'darkorange';
             const ladderEndSquareNo = getLadderFrom(squareNo);
-            return ladderEndSquareNo == null ? 'yellow' :
-                ladderEndSquareNo == 90 ? 'DarkOrange' :
-                    ladderEndSquareNo > squareNo ? 'green' :
-                        'red';
+            if (ladderEndSquareNo == null) return 'khaki';
+            if (ladderEndSquareNo > squareNo) return 'limegreen';
+            return 'indianred';
         }
 
         function getLadderFrom(squareNo) {

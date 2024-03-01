@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        document.getElementById('app').innerHTML = createBoard();
+
+        function getLadderFrom(squareNo){
+            // opp
+            if(squareNo==1)return 40;
+            if(squareNo==8)return 10;
+            if(squareNo==36)return 52;
+            if(squareNo==43)return 62;
+            if(squareNo==49)return 79;
+            if(squareNo==65)return 82;
+            if(squareNo==68)return 85;
+
+            // ned
+            if(squareNo==87)return 70;
+            if(squareNo==74)return 12;
+            if(squareNo==64)return 27;
+            if(squareNo==56)return 37;
+            if(squareNo==42)return 30;
+            if(squareNo==33)return 3;
+            if(squareNo==24)return 5;
+
+            return null;
+        }
+
+        function createBoard() {
+            let html = '';
+            for (let squareNo = 90; squareNo > 1; squareNo -= 18){
+                html += createRow(squareNo, -1) + createRow(squareNo - 17, 1);
+            }
+            return html;
+        }
+
+        function createRow(startValue, change) {
+            let html = '';
+            for (let numberToAdd = 0; numberToAdd < 9; numberToAdd++) {
+                html += /*HTML*/`<div>${startValue + numberToAdd * change}</div>`;
+            }
+            return html;
+        }
+    </script>
+</body>
+
+</html>
